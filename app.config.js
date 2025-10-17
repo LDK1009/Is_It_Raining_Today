@@ -24,8 +24,8 @@ import 'dotenv/config'
 export default {
   expo: {
     // 📱 앱 기본 정보
-    name: '주식고사',                    // 앱 스토어에 표시될 앱 이름
-    slug: 'stock-exam',                 // Expo 프로젝트 고유 식별자 (URL 친화적)
+    name: '오늘 비 오나?',                    // 앱 스토어에 표시될 앱 이름
+    slug: 'is-it-raining-today',                 // Expo 프로젝트 고유 식별자 (URL 친화적)
     version: '1.0.0',                   // 앱 버전 (앱 스토어 업데이트시 증가)
 
     // 🔄 OTA(Over-The-Air) 업데이트 설정
@@ -38,14 +38,18 @@ export default {
     // 🎨 UI/UX 설정
     orientation: 'portrait',            // 화면 방향 고정 (세로 모드만)
     icon: './assets/images/icon.png',   // 앱 아이콘 경로
-    scheme: 'stockexam',                // 딥링크용 URL 스키마 (stockexam://...)
-    userInterfaceStyle: 'automatic',    // 다크/라이트 모드 자동 감지
+    scheme: 'isitraining',                // 딥링크용 URL 스키마 (isitraining://...)
+    userInterfaceStyle: 'light',    // 라이트 모드 고정
     newArchEnabled: true,               // React Native 새로운 아키텍처 활성화
 
     // 🍎 iOS 플랫폼 설정
     ios: {
       supportsTablet: true,                           // iPad 지원 여부
-      bundleIdentifier: 'com.stockexam.app',         // iOS 앱 고유 식별자 (앱 스토어)
+      bundleIdentifier: 'com.isitraining.app',         // iOS 앱 고유 식별자 (앱 스토어)
+      infoPlist: {
+        NSLocationWhenInUseUsageDescription: '날씨 정보를 제공하기 위해 위치 정보가 필요합니다.',
+        NSLocationAlwaysAndWhenInUseUsageDescription: '날씨 정보를 제공하기 위해 위치 정보가 필요합니다.',
+      },
       
       // 🔄 iOS OTA 업데이트 정책
       // appVersion 기반: app.json의 version과 동일한 runtimeVersion 사용
@@ -58,10 +62,16 @@ export default {
       // 적응형 아이콘 설정 (Android 8.0+)
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',  // 전경 이미지
-        backgroundColor: '#ffffff',                            // 배경색
+        backgroundColor: '#FEF7FF',                            // 배경색
       },
-      package: 'com.stockexam.app',                   // Android 패키지명 (Google Play)
+      package: 'com.isitraining.app',                   // Android 패키지명 (Google Play)
       edgeToEdgeEnabled: true,                        // 전체 화면 모드 (상태바/네비바까지 사용)
+      permissions: [
+        'ACCESS_FINE_LOCATION',
+        'ACCESS_COARSE_LOCATION',
+        'RECEIVE_BOOT_COMPLETED',
+        'VIBRATE',
+      ],
       
       // 🔄 Android OTA 업데이트 버전
       // 문자열로 고정: 같은 runtimeVersion을 가진 빌드끼리만 OTA 업데이트 가능
@@ -89,7 +99,22 @@ export default {
           image: './assets/images/splash-icon.png',   // 스플래시 화면 이미지
           imageWidth: 200,                            // 이미지 너비 (픽셀)
           resizeMode: 'contain',                      // 이미지 크기 조정 방식
-          backgroundColor: '#000000',                 // 스플래시 화면 배경색
+          backgroundColor: '#FEF7FF',                 // 스플래시 화면 배경색
+        },
+      ],
+      // 위치 서비스 플러그인
+      [
+        'expo-location',
+        {
+          locationAlwaysAndWhenInUsePermission: '날씨 정보를 제공하기 위해 위치 정보가 필요합니다.',
+        },
+      ],
+      // 알림 플러그인
+      [
+        'expo-notifications',
+        {
+          icon: './assets/images/icon.png',
+          color: '#8B5CF6',
         },
       ],
     ],
