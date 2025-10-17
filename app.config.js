@@ -32,7 +32,7 @@ export default {
     // 앱 스토어 업데이트 없이 JavaScript 번들을 실시간으로 업데이트할 수 있음
     updates: {
       // EAS Update 서비스 URL - 프로젝트별 고유 주소
-      url: 'https://u.expo.dev/21f2a9db-2523-4ff3-b912-672e555bf3b8',
+      url: 'https://u.expo.dev/7794e08b-bb2f-44f7-a366-d63e3fc5374a',
     },
 
     // 🎨 UI/UX 설정
