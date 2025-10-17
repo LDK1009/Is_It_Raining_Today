@@ -1,0 +1,25 @@
+import { useEffect, useState } from 'react'
+import { Keyboard } from 'react-native'
+
+export const useKeyboard = () => {
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => setKeyboardVisible(true)
+    )
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setKeyboardVisible(false)
+    )
+
+    // 클린업 함수
+    return () => {
+      keyboardDidShowListener.remove()
+      keyboardDidHideListener.remove()
+    }
+  }, [])
+
+  return { isKeyboardVisible }
+}
